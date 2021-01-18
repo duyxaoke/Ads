@@ -1,0 +1,19 @@
+﻿<select class="myControl select2" ng-model="myroot.Value"
+        data-val="true" data-val-number=""
+        data-val-range="{{myroot.Core.label}} không đúng"
+        data-val-range-max="1000000000" data-val-range-min="0"
+        data-val-required="{{myroot.Core.label}} không đúng"
+        ng-change="myroot.Onchange()"
+        ng-disabled="myroot.Core.IsDisabled"
+        style="width:100%;">
+    <option ng-if="!myroot.Core.IsHideValueDefault"
+            value="{{myroot.Core.ValueDefault}}">
+        {{myroot.Core.label2}}
+    </option>
+    <option value="{{item[myroot.Core.IDValue]}}"
+            ng-init="($first && (myroot.API.OnStart()))
+                || ($last && (myroot.API.OnEnd()))"
+            ng-repeat="item in myroot.Lst">
+        {{item[myroot.Core.Text]}}
+    </option>
+</select> 

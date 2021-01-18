@@ -1,0 +1,57 @@
+[
+  //{
+  //  "outputFileName": "script-handler/app/controller/indexcontroller.js",
+  //  "inputFiles": [
+  //    "script-handler/app/controller/master-page-controller.js"
+  //  ]
+  //},
+  {
+    "outputFileName": "script-handler/app/directives/directives.js",
+    "inputFiles": [
+      "script-handler/app/directives/customselect2/customselect2.js",
+      "script-handler/app/directives/datetimepicker/datetimepicker.js",
+      "script-handler/app/directives/formatMoney.js",
+      "script-handler/app/directives/getWidth.js",
+      "script-handler/app/directives/lazyLoad.js",
+      "script-handler/app/directives/noInput.js",
+      "script-handler/app/directives/whenEnter.js",
+      "script-handler/app/directives/compile.js",
+      "script-handler/app/directives/gridSort/gridSort.js",
+      "script-handler/app/directives/pagination-style/pagination-style.js",
+      "script-handler/app/directives/pagination-style2/pagination-style2.js",
+      "script-handler/app/directives/inputFormat.js"
+    ]
+  },
+  {
+    "outputFileName": "script-handler/app/factory/indexfactory.js",
+    "inputFiles": [
+      "script-handler/app/factory/LocalStorage.js",
+      "script-handler/app/factory/CommonFactory.js",
+      //"script-handler/app/factory/ApiHelper.js",
+      "script-handler/app/factory/UtilFactory.js",
+      //"script-handler/app/factory/HelperFactory.js",
+      "script-handler/factory-data/data-factory.js"
+    ]
+  },
+  {
+    "outputFileName": "script-handler/app/filters/filters.js",
+    "inputFiles": [
+      "script-handler/app/filters/dateFormat.js",
+      "script-handler/app/filters/formatMonthYear.js",
+      "script-handler/app/filters/trustHtml.js",
+      "script-handler/app/filters/ifEmpty.js",
+      "script-handler/app/filters/toFixedDecimal.js"
+    ]
+  },
+  {
+    "outputFileName": "script-handler/app/app-bundle.js",
+    "inputFiles": [
+      "script-handler/app/scripts/utiljs.js",
+      //"script-handler/app/controller/indexcontroller.js",
+      "script-handler/app/directives/directives.js",
+      "script-handler/app/factory/indexfactory.js",
+      "script-handler/app/filters/filters.js",
+      "script-handler/app/app.js"
+    ]
+  }
+]

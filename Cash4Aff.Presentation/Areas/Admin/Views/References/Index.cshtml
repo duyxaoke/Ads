@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Danh sách tuyến dưới";
+}
+<style>
+    ul {
+        list-style-type: none;
+    }
+
+    .modal.modal-fullscreen .modal-dialog {
+        top: 20px;
+        width: 80%;
+        height: auto;
+        margin: auto;
+        max-width: none;
+    }
+</style>
+
+<div class="app-main__inner" ng-controller="IndexController" ng-cloak>
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div class="page-title-icon">
+                    <i class="pe-7s-medal icon-gradient bg-tempting-azure"></i>
+                </div>
+                <div>
+                    @ViewBag.Title
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <div id="tree"></div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var IndexController = ($scope, $rootScope, $timeout, $filter, $compile, ApiHelper, CommonHelper, $q) => {
+            //#region declare variable
+            $scope.UpdateMode = false;
+            $scope.Reference = {};
+            //#endregion
+
+
+            $('#tree').jstree({
+                'core': {
+                    'data': @Html.Raw(Json.Encode(ViewBag.UserTreeView))
+                },
+                "types": {
+                    "default": {
+                        "icon": "fa fa-user"
+                    }
+                },
+                "plugins": ["types", "wholerow", "numbering"],
+            });
+
+        }
+        IndexController.$inject = ["$scope", "$rootScope", "$timeout", "$filter", "$compile", "ApiHelper", "CommonHelper", "$q"];
+        addController("IndexController", IndexController);
+    </script>
+}

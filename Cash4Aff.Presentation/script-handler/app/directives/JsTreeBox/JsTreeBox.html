@@ -1,0 +1,41 @@
+﻿<!--<div style="border: 1px solid #e4dcdc;height: 34px;text-align: left;background-color: #f7f7f7;padding-top:9px;">
+    <label style="position: relative; top: -3px; left:28px;">
+        <input type="checkbox" class="checkbox style-0" ng-model="myroot.IsCheckedAll" ng-click="myroot_IsSelectedAll_Onclick()">
+        <span>Tất cả</span>
+    </label>
+</div>-->
+<div class="col-sm-12 col-md-12 col-lg-12" style="padding: 5px 5px 0px 5px; " ng-show="myroot.IsSearchActived">
+    <input class="ng-tree-search searchInput_HelpTrees form-control"
+           style="margin-bottom:5px;"
+           placeholder="Nhập từ khóa cần tìm"
+           ng-model="myroot.txtKeySearch.Text">
+</div>
+<div style="clear:both;"></div>
+<div class="ngHelpTreesPlugins col-sm-12 col-md-12 col-lg-12"
+     style="height: 20px; margin: 5px 5px 5px -5px;display:table-cell; "
+     ng-show="!myroot.IsSearchFound">
+    <label style="text-align:center;width:100%">
+        Không có dữ liệu
+    </label>
+</div>
+<div class="boxjstree" style="padding:0;top:0px;overflow:auto;max-height:450px;">
+    <div class="scrollable-menu" style="max-height:450px;">
+        <div class="ngHelpTreesPlugins col-sm-12 col-md-12 col-lg-12"
+             style="height: 20px; margin: 5px 5px 5px -5px;display:table-cell; "
+             ng-show="myroot.IsChkAllActived && myroot.IsSearchFound && !myroot.IsHideChkAll">
+            <label>
+                <input type="checkbox" class="checkbox style-0" ng-model="myroot.IsCheckedAll" ng-click="myroot_IsSelectedAll_Onclick()">
+                <span>Chọn tất cả</span>
+            </label>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="ngHelpTrees" data-style="checkbox" ng-show="myroot.IsSearchFound">
+            <js-tree id="{{myroot.IDTree}}"
+                     myroot="myroot"
+                     tree-data="myroot.TreeData"
+                     tree-core="myroot.core"
+                     tree-search="myroot.txtKeySearch.Text"
+                     tree-plugins="{{attrs.treePlugins}}"></js-tree>
+        </div>
+    </div>
+</div>

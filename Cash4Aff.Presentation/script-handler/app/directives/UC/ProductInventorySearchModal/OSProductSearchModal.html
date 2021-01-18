@@ -1,0 +1,80 @@
+﻿<div class="modal fade PnSupplierSearchModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding:15px 15px 0px">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title"><strong>Tìm kiếm sản phẩm</strong></h4>
+            </div>
+            <div class="modal-body" style="padding:5px 5px 10px">
+                <div class="widget-body" style="padding:5px 15px 0px">
+                    <div class="clearfix well" style="padding:5px">
+                        <div class="{{ myroot.Core.IsShowCategory ? 'col-lg-5' : 'col-lg-10' }}">
+                            <input type="text" class="form-control" placeholder="Mã sản phẩm, tên sản phẩm" ng-model="myroot.txtSearch.Text" />
+                        </div>
+                        <div class="col-lg-5" ng-show="myroot.Core.IsShowCategory">
+                            <js-tree-ddl myroot="myroot.ddlUserProductCategory" tree-data="myroot.ddlUserProductCategory.TreeData" tree-plugins="search" place-holder="'Chọn ngành hàng'"></js-tree-ddl>
+                        </div>
+                        <div class="col-lg-2">
+                            <button class="btn btn-default btn-block cc-btn-style cc-btn-color-violet" id="btnSearch" type="button" name="btnProductSearch" ng-click="myroot.btnSearch.OnClick(1);"><i class="fa fa-search"></i> Tìm kiếm</button>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center; width:60px;" ng-show="myroot.Core.PopupType == 'Multiple'"></th>
+                                <th style="text-align:center; width:100px;">
+                                    Mã sản phẩm
+                                </th>
+                                <th style="text-align:center">
+                                    Mã tham chiếu
+                                </th>
+                                <th style="text-align:center">
+                                    Tên sản phẩm
+                                </th>
+                                <th style="text-align:center;border-right: 1px solid #ddd;width:150px">
+                                    Ngành hàng
+                                </th>
+                                <th style="text-align:center;width:120px" ng-if="Core.IsShowUCProductsSearch2">
+                                    Số lượng
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in myroot.Lst">
+                                <td style="text-align: center; width:60px;" ng-show="myroot.Core.PopupType == 'Multiple'">
+                                    <label style="position: relative; top: 5px; left:5px;">
+                                        <input type="checkbox" class="checkbox style-0" ng-model="item.IsChecked_">
+                                        <span></span>
+                                    </label>
+                                </td>
+                                <td>{{item.ProductID}}</td>
+                                <td>{{item.ReferenceID}}</td>
+                                <td>
+                                    <a ng-click="myroot.ChoosedProduct(item)" href="javascript:void(0);"> {{item.ProductName}}</a>
+                                </td>
+                                <td style="border-right: 1px solid #ddd;">{{item.CategoryName}}</td>
+                                <td ng-if="Core.IsShowQuanity">{{item.Quanity}}</td>
+                            </tr>
+                            <tr ng-show="myroot.Lst.length == 0" style="text-align:center">
+                                <td colspan="{{myroot.Core.TotalColumn}}">Không có dữ liệu</td>
+                            </tr>
+                            <tr ng-show="myroot.Lst.length > 0">
+                                <td colspan="{{myroot.Core.TotalColumn}}">
+                                    <div style="text-align:right;padding:0px;">
+                                        <pagination-style1 total-items="myroot.Pager.TotalItems" pager="myroot.Pager" fn-call-back="myroot.Paging(PageClicked)"></pagination-style1>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary cc-btn-style" ng-show="myroot.Core.PopupType == 'Multiple'" ng-click="myroot.btnAdd.OnClick();"><i class="fa fa-save"></i> Nhập sản phẩm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="clear:both;"></div>

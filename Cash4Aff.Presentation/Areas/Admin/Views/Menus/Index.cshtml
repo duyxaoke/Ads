@@ -1,0 +1,292 @@
+﻿
+@{
+    ViewData["Title"] = "Quản lý menu";
+}
+
+<div ng-controller="IndexController" ng-cloak>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Menu</h4>
+
+                <div class="page-title-right">
+                    <button type="button" ng-click="Create()" class="btn btn-success btn-rounded waves-effect waves-light">
+                        <i class="mdi mdi-plus font-size-16 align-middle mr-2"></i> Thêm mới
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <table id="myTable" class="table table-hover table-striped table-bordered dtr-inline"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="PnModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ UpdateMode ? "Cập nhật" : "Thêm mới" }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="frmModal" name="frmModal" class="needs-validation" novalidate="">
+                    <!-- /form .needs-validation -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>
+                                Menu cha
+                            </label>
+                            <select class="form-control" ng-options="c.Id as c.Name for c in Data" ng-model="Menu.ParentId">
+                                <option value="" selected="selected">---Select parent---</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Tên menu
+                            </label>
+                            <input type="text" class="form-control" ng-model="Menu.Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Url
+                            </label>
+                            <input type="text" class="form-control" ng-model="Menu.Url" required>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Icon
+                            </label>
+                            <input type="text" class="form-control" ng-model="Menu.Icon">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Sắp xếp
+                            </label>
+                            <input type="text" class="form-control" ng-model="Menu.Order">
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" id="SystemEnable" ng-model="Menu.IsActive">
+                                Hoạt động
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.modal-body -->
+                    <!-- .modal-footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn-icon btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn-icon btn btn-success" ng-disabled="frmModal.$invalid" ng-click="Save()"><i class="bx bx-save mr-1"></i>{{ UpdateMode ? "Cập nhật" : "Thêm mới" }}</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section scripts{
+    <script>
+        var IndexController = ($scope, $rootScope, $timeout, $filter, $compile, ApiHelper, CommonHelper, UtilFactory, DataFactory, $q) => {
+
+            //#region declare variable
+            $scope.UpdateMode = false;
+            $scope.Menu = {};
+            $scope.Data = [];
+            //#endregion
+
+            //#region Datatable
+            $(function () {
+                var peopleList = $('#myTable').DataTable({
+                    "bProcessing": true,
+                    "bSort": true,
+                    "bServerSide": true,
+                    "language": {
+                        paginate: {
+                            previous: '<i class="fa fa-lg fa-angle-left"></i>',
+                            next: '<i class="fa fa-lg fa-angle-right"></i>'
+                        }
+                    },
+                    "sAjaxSource": "/Menus/Data",
+                    "aoColumnDefs": [
+                        {
+                            "sName": "Name",
+                            "sTitle": "Tên menu",
+                            "bSearchable": true,
+                            "bSortable": true,
+                            "aTargets": [0]
+                        },
+                        {
+                            "sName": "Url",
+                            "sTitle": "Url",
+                            "bSearchable": true,
+                            "bSortable": true,
+                            "aTargets": [1]
+                        },
+                        {
+                            "sName": "Order",
+                            "sTitle": "Sắp xếp",
+                            "bSearchable": true,
+                            "bSortable": true,
+                            "aTargets": [2]
+                        },
+                        {
+                            'mRender': function (data, type, row, meta) {
+                                return `
+                                <div class="text-center">
+                                    <a href="#" ng-click="Update('` + data + `');" class="text-success p-1 font-size-16"><i class="bx bxs-edit-alt"></i></a>
+                                    <a href="#" ng-click="Delete('` + data + `');" class="text-danger p-1 font-size-16"><i class="bx bxs-trash"></i></a>
+                                </div>`;
+                            },
+                            "sName": "Id",
+                            "bSortable": false,
+                            "aTargets": [3],
+                            "sWidth": "150px"
+                        }
+                    ],
+                    createdRow: function (row, data, dataIndex) {
+                        $compile(angular.element(row).contents())($scope);
+                    }
+                });
+            });
+            //#endregion
+
+            //#region ReadById
+            var ReadById = (Id) => {
+                let defer = $q.defer();
+                $rootScope.MasterPage.IsLoading = true;
+                let strApiEndPoint = CommonHelper.MenuUrl + Id;
+                ApiHelper.GetMethod(strApiEndPoint)
+                    .then(function (response) {
+                        $rootScope.MasterPage.IsLoading = false;
+                        $scope.Menu = response.Data;
+                        defer.resolve(response);
+                    })
+                    .catch(function (response) {
+                        sys.Alert(false, response.Message);
+                        defer.reject(response);
+                        $rootScope.MasterPage.IsLoading = false;
+                    });
+                return defer.promise;
+            };
+            //#endregion
+
+            //#region Create
+            $scope.Create = function () {
+                $scope.UpdateMode = false;
+                $scope.Menu = {};
+                $('#PnModal').appendTo('body').modal('show');
+            };
+            //#endregion
+
+            //#region Update
+            $scope.Update = function (Id) {
+                $scope.UpdateMode = true;
+                ReadById(Id);
+                $('#PnModal').appendTo('body').modal('show');
+            }
+            //#endregion
+
+            //#region Delete
+            $scope.Delete = function (Id) {
+                Swal.fire({
+                    title: "Xác nhận xóa?",
+                    text: "Một khi đã xóa, bạn không thể khôi phục lại",
+                    type: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Đồng ý",
+                    cancelButtonText: "Quay lại",
+                    confirmButtonClass: "btn btn-success mt-2",
+                    cancelButtonClass: "btn btn-danger ml-2 mt-2",
+                    buttonsStyling: !1
+                }).then(function (t) {
+                    if (t.value) {
+                        $rootScope.MasterPage.IsLoading = true;
+                        let strApiEndPoint = CommonHelper.MenuUrl + Id;
+                        ApiHelper.DeleteMethod(strApiEndPoint)
+                            .then(function (response) {
+                                $rootScope.MasterPage.IsLoading = false;
+                                $('#myTable').DataTable().ajax.reload(null, false);
+                                sys.Alert(true, 'Xóa thành công!');
+                            })
+                            .catch(function (response) {
+                                sys.Alert(false, response.Message);
+                                $rootScope.MasterPage.IsLoading = false;
+                            });
+                    }
+                });
+            };
+            //#endregion
+
+            //#region Save
+            $scope.Save = function () {
+                if (!$scope.UpdateMode) {
+                    $rootScope.MasterPage.IsLoading = true;
+                    let strApiEndPoint = CommonHelper.MenuUrl;
+                    ApiHelper.PostMethod(strApiEndPoint, $scope.Menu)
+                        .then(function (response) {
+                            $rootScope.MasterPage.IsLoading = false;
+                            $('#myTable').DataTable().ajax.reload(null, false);
+                            sys.Alert(true, 'Thêm thành công');
+                        })
+                        .catch(function (response) {
+                            sys.Alert(false, response.Message);
+                            defer.reject(response);
+                            $rootScope.MasterPage.IsLoading = false;
+                        });
+                    $('#PnModal').modal('hide');
+                }
+                else {
+                    $rootScope.MasterPage.IsLoading = true;
+                    let strApiEndPoint = CommonHelper.MenuUrl;
+                    ApiHelper.PutMethod(strApiEndPoint, $scope.Menu)
+                        .then(function (response) {
+                            $rootScope.MasterPage.IsLoading = false;
+                            $('#myTable').DataTable().ajax.reload(null, false);
+                            sys.Alert(true, 'Cập nhật thành công');
+                        })
+                        .catch(function (response) {
+                            sys.Alert(false, response.Message);
+                            defer.reject(response);
+                            $rootScope.MasterPage.IsLoading = false;
+                        });
+                    $('#PnModal').modal('hide');
+                }
+            };
+            //#endregion
+
+            //#region GetAll
+            $rootScope.MasterPage.IsLoading = true;
+            UtilFactory.WaitingLoadDirective(
+                [
+                ]).then(() => {
+                    $q.all({
+                        Menus: DataFactory.Menus_Get(),
+                    }).then((MultipleRes) => {
+                        $scope.Data = MultipleRes.Menus.Data;
+                    });
+                }).catch((response) => {
+                    throw response;
+                });
+            $rootScope.MasterPage.IsLoading = false;
+            //#endregion
+        }
+        IndexController.$inject = ["$scope", "$rootScope", "$timeout", "$filter", "$compile", "ApiHelper", "CommonHelper", "UtilFactory", "DataFactory", "$q"];
+        addController("IndexController", IndexController);
+    </script>
+}

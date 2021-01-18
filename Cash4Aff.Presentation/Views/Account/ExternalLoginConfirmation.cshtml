@@ -1,0 +1,44 @@
+﻿@model Cash4Aff.Presentation.Models.ExternalLoginConfirmationViewModel
+@{
+    ViewBag.Title = "Register";
+}
+<div class="col-md-12">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Xác nhận đăng ký bằng @ViewBag.LoginProvider.</h3>
+        </div>
+        <div class="box-body">
+            @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <p class="text-info">
+                    Xác nhận đăng ký thành công với <strong>@ViewBag.LoginProvider</strong>. Vui lòng nhập tên hiển thị cho người dùng ở bên dưới và nhấp vào nút Đăng ký để hoàn tất.
+                </p>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Tên hiển thị" })
+                    </div>
+                </div>
+                <div class="form-group" hidden>
+                    <div class="form-label-group">
+                        <input type="hidden" name="Username" value="@Model.Email" />
+                    </div>
+                </div>
+                <div class="form-group" hidden>
+                    <div class="form-label-group">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Đăng ký</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

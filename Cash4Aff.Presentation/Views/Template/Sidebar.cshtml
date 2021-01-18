@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Cash4Aff.Application.ViewModels.MenuViewModel>
+<div class="vertical-menu">
+
+    <div data-simplebar class="h-100">
+
+        <div class="navbar-brand-box">
+            <a href="index.html" class="logo">
+                <i class="mdi mdi-album"></i>
+                <span>
+                    Cash4AFF
+                </span>
+            </a>
+        </div>
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title">Menu</li>
+                @foreach (var item in Model)
+                {
+                    <!-- co item con -->
+                    if (item.Childrens.Count() > 0)
+                    {
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="@item.Icon"></i>
+                                <span>@item.Name</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                @foreach (var itemChild in item.Childrens)
+                                {
+                                    <li>
+                                        <a href="@itemChild.Url">
+                                            @itemChild.Name
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="@item.Url" class="waves-effect">
+                                <i class="@item.Icon"></i><span>@item.Name</span>
+                            </a>
+                        </li>
+                    }
+                }
+
+
+                <li>
+                    <a href="index.html" class="waves-effect">
+                        <i class="mdi mdi-home-analytics"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="waves-effect">
+                        <i class="mdi mdi-home-analytics"></i><span>Kiếm tiền</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="waves-effect">
+                        <i class="mdi mdi-home-analytics"></i><span>Tuyến dưới</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="waves-effect">
+                        <i class="mdi mdi-home-analytics"></i><span>Báo cáo</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="waves-effect">
+                        <i class="mdi mdi-home-analytics"></i><span>Rút tiền</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>
+

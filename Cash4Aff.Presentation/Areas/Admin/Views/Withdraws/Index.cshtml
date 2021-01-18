@@ -1,0 +1,235 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Rút tiền / Lịch sử rút tiền";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Rút tiền</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-controller="IndexController" ng-cloak>
+    <div class="col-md-6">
+        <div class="card" style="height: 295px">
+            <div class="card-body">
+                <div class="float-right ml-2">
+                    <h5 class="font-size-14"><i class="bx bx-wallet text-primary font-size-16 align-middle mr-1"></i> {{Balance |toFixedDecimal:2| ifEmpty:'0'}}đ</h5>
+                </div>
+                <h5 class="font-size-14 mb-4">Số dư khả dụng</h5>
+                <form id="frmUpdate" name="frmUpdate" novalidate="">
+                    <div class="form-group mb-3">
+                        <label>Hình thức thanh toán :</label>
+                        <select class="custom-select">
+                            <option>Tài khoản ngân hàng</option>
+                            <option>Momo</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Số tiền :</label>
+                        <div class="input-group mb-3">
+                            <input type="number" min="50000" max="{{Balance}}" ng-model="objWithdraw.Amount" style="text-align:right;" required class="form-control">
+                            <div class="input-group-append">
+                                <label class="input-group-text">VND</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success w-md" ng-click="Confirm()" ng-disabled="frmUpdate.$invalid">Rút tiền</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="float-right ml-2">
+                </div>
+                <h5 class="font-size-14 mb-4">Thông tin rút tiền</h5>
+                <div>
+                    <div class="form-group mb-3">
+                        <label>Tên tài khoản:</label>
+                        <label>{{Wallet.BankAccountName}}</label>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Số tài khoản:</label>
+                        <label>{{Wallet.BankAccountNumber}}</label>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Ngân hàng:</label>
+                        <label>{{Wallet.BankName}}</label>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Chi nhánh:</label>
+                        <label>{{Wallet.BranchName}}</label>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Momo:</label>
+                        <label>{{Wallet.Phone}}</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped ">
+                    <thead>
+                        <tr>
+                            <th>Ngày</th>
+                            <th>Số tiền rút</th>
+                            <th>Hình thức nhận tiền</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in Withdraw | orderBy: '-Id'">
+                            <td>{{item.CreateDate | dateFormat:'HH:mm dd/MM/yyyy'}}</td>
+                            <td>{{item.Amount |toFixedDecimal:2| ifEmpty:'0'}}đ</td>
+                            <td>
+                                <div ng-bind-html="item.Description | trustHtml">
+                                </div>
+                            </td>
+                            <td ng-show="item.Status == 0"><span class='label label-warning'>Chờ duyệt</span></td>
+                            <td ng-show="item.Status == 1"><span class='label label-success'> Đã duyệt</span></td>
+                            <td ng-show="item.Status == 2"><span class='label label-danger'>Đã hủy</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+    var IndexController = ($scope, $rootScope, $timeout, $filter, $compile, ApiHelper, CommonHelper, $q) => {
+
+        //#region declare variable
+        $scope.Balance = @ViewBag.Balance;
+        $scope.Wallet = {};
+        $scope.Withdraw = [];
+        $scope.Banks = [];
+        $scope.objWithdraw = {};
+        //#endregion
+
+        //#region GetBank
+        $scope.GetBank = function () {
+            let defer = $q.defer();
+            $rootScope.MasterPage.IsLoading = true;
+            let strApiEndPoint = CommonHelper.BankUrl;
+            ApiHelper.GetMethod(strApiEndPoint).then(function (response) {
+                $rootScope.MasterPage.IsLoading = false;
+                $scope.Banks = response.Data;
+                defer.resolve(response);
+            }).catch(function (response) {
+                defer.reject(response);
+                $rootScope.MasterPage.IsLoading = false;
+            });
+            return defer.promise;
+        };
+        //#endregion
+
+        //#region GetWallet
+        $scope.GetWallet = function () {
+            let defer = $q.defer();
+            $rootScope.MasterPage.IsLoading = true;
+            let strApiEndPoint = CommonHelper.WalletUrl + "GetByUser?userID=@User.Identity.GetUserId()";
+            ApiHelper.GetMethod(strApiEndPoint).then(function (response) {
+                $rootScope.MasterPage.IsLoading = false;
+                $scope.Wallet = response.Data;
+                if($scope.Wallet.BankID){
+                            $scope.GetBank().then(function (responseBank) {
+                                $scope.Wallet.BankName = responseBank.Data.filter(c => c.Id == $scope.Wallet.BankID)[0].BankName;
+                            });
+                }
+                defer.resolve(response);
+            }).catch(function (response) {
+                defer.reject(response);
+                $rootScope.MasterPage.IsLoading = false;
+            });
+            return defer.promise;
+        };
+        //#endregion
+
+        //#region GetWithdraw
+        $scope.GetWithdraw = function () {
+            let defer = $q.defer();
+            $rootScope.MasterPage.IsLoading = true;
+            let strApiEndPoint = CommonHelper.WithdrawUrl + "GetByUser?userID=@User.Identity.GetUserId()";
+            ApiHelper.GetMethod(strApiEndPoint).then(function (response) {
+                $rootScope.MasterPage.IsLoading = false;
+                $scope.Withdraw = response.Data;
+                defer.resolve(response);
+            }).catch(function (response) {
+                defer.reject(response);
+                $rootScope.MasterPage.IsLoading = false;
+            });
+            return defer.promise;
+        };
+        //#endregion
+
+        //#region Confirm
+        $scope.Confirm = function () {
+            Swal.fire({
+                title: "Xác nhận rút tiền?",
+                text: "Một khi xác nhận, bạn không thể hủy bỏ yêu cầu",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonText: "Đồng ý",
+                cancelButtonText: "Quay lại",
+                confirmButtonClass: "btn btn-success mt-2",
+                cancelButtonClass: "btn btn-danger ml-2 mt-2",
+                buttonsStyling: !1
+            }).then(function (t) {
+                if (t.value) {
+                    let defer = $q.defer();
+                    $rootScope.MasterPage.IsLoading = true;
+                    let strApiEndPoint = CommonHelper.WithdrawUrl;
+                    if ($scope.TypeWithdraw == 1) {
+                        $scope.objWithdraw.Description = "";
+                        $scope.objWithdraw.Description += "Tên tài khoản: " + $scope.Wallet.BankAccountName + "<br/>";
+                        $scope.objWithdraw.Description += "Số tài khoản: " + $scope.Wallet.BankAccountNumber + "<br/>";
+                        $scope.objWithdraw.Description += "Ngân hàng: " + $scope.Wallet.BankName + "<br/>";
+                        $scope.objWithdraw.Description += "Chi nhánh: " + $scope.Wallet.BranchName + "<br/>";
+                    }
+                    if ($scope.TypeWithdraw == 0) {
+                        $scope.objWithdraw.Description = "Momo: " + $scope.Wallet.Phone;
+                    }
+                    ApiHelper.PostMethod(strApiEndPoint, $scope.objWithdraw).then(function (response) {
+                        $rootScope.MasterPage.IsLoading = false;
+                        sys.Alert(true, 'Gửi yêu cầu thành công!');
+                        setTimeout(function () { location.reload(); }, 2000);
+                        defer.resolve(response);
+                    }).catch(function (response) {
+                        sys.Alert(false, response.Message);
+                        defer.reject(response);
+                        $rootScope.MasterPage.IsLoading = false;
+                    });
+                }
+            });
+        };
+        //#endregion
+        $scope.GetWallet().then(function (response) {
+            if(!$scope.Wallet.BankAccountNumber){
+                $scope.TypeWithdraw = 0;
+            }
+            else{
+                $scope.TypeWithdraw = 1;
+            }
+        });
+        $scope.GetWithdraw();
+
+    }
+    IndexController.$inject = ["$scope", "$rootScope", "$timeout", "$filter", "$compile", "ApiHelper", "CommonHelper", "$q"];
+    addController("IndexController", IndexController);
+    </script>
+}

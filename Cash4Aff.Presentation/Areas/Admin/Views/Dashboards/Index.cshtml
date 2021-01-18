@@ -1,0 +1,216 @@
+﻿@using Microsoft.AspNet.Identity
+@using Cash4Aff.Application.ViewModels
+@{
+    ViewBag.Title = "Index";
+    var userInfo = ViewBag.UserInfo as UserInfoViewModel;
+}
+
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Dashboard</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Xeloro</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-md-6 col-xl-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-4">
+                        <span class="badge badge-soft-primary float-right">So với tuần trước</span>
+                        <h5 class="card-title mb-0">SỐ DƯ KHẢ DỤNG</h5>
+                    </div>
+                    <div class="row d-flex align-items-center mb-4">
+                        <div class="col-8">
+                            <h2 class="d-flex align-items-center mb-0">
+                                $17.21
+                            </h2>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span class="text-muted">
+                                12.5% <i class="mdi mdi-arrow-up text-success"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="progress shadow-sm" style="height: 5px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 57%;">
+                        </div>
+                    </div>
+                </div>
+                <!--end card body-->
+            </div><!-- end card-->
+        </div> <!-- end col-->
+        @*<div class="col-md-6 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <span class="badge badge-soft-primary float-right">Per Month</span>
+                            <h5 class="card-title mb-0">THÀNH VIÊN TUYẾN DƯỚI</h5>
+                        </div>
+                        <div class="row d-flex align-items-center mb-4">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    $1875.54
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span class="text-muted">
+                                    18.71% <i class="mdi mdi-arrow-down text-danger"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="progress shadow-sm" style="height: 5px;">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 57%;">
+                            </div>
+                        </div>
+                    </div>
+                    <!--end card body-->
+                </div><!-- end card-->
+            </div> <!-- end col-->*@
+
+        <div class="col-md-6 col-xl-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-4">
+                        <span class="badge badge-soft-primary float-right">So với tuần trước</span>
+                        <h5 class="card-title mb-0">THÀNH VIÊN TUYẾN DƯỚI</h5>
+                    </div>
+                    <div class="row d-flex align-items-center mb-4">
+                        <div class="col-8">
+                            <h2 class="d-flex align-items-center mb-0">
+                                784
+                            </h2>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span class="text-muted">
+                                57% <i class="mdi mdi-arrow-up text-success"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="progress shadow-sm" style="height: 5px;">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 57%;">
+                        </div>
+                    </div>
+                </div>
+                <!--end card body-->
+            </div>
+            <!--end card-->
+        </div> <!-- end col-->
+
+        <div class="col-md-6 col-xl-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-4">
+                        <span class="badge badge-soft-primary float-right">So với tuần trước</span>
+                        <h5 class="card-title mb-0">TỔNG THU NHẬP</h5>
+                    </div>
+                    <div class="row d-flex align-items-center mb-4">
+                        <div class="col-8">
+                            <h2 class="d-flex align-items-center mb-0">
+                                1,15,187
+                            </h2>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span class="text-muted">
+                                17.8% <i class="mdi mdi-arrow-down text-danger"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="progress shadow-sm" style="height: 5px;">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: 57%;"></div>
+                    </div>
+                </div>
+                <!--end card body-->
+            </div><!-- end card-->
+        </div> <!-- end col-->
+    </div>
+    <!-- end row-->
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title">Thu nhập từ 10-01-2021 đến 17-01-2021</h4>
+                    <div id="morris-bar-example" class="morris-chart"></div>
+
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title">Area Chart</h4>
+                    <p class="card-subtitle mb-4">An area chart that is rendered within the browser using SVG or VML. Displays tips when hovering over points.</p>
+
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <!-- end row-->
+
+
+    @section scripts{
+        <script>
+            $("#morris-bar-example").length && Morris.Bar({
+                element: "morris-bar-example",
+                barColors: ["#3F51B5", "#00c2b2"],
+                data: [{
+                    y: "2013",
+                    a: 80,
+                    b: 100
+                }, {
+                    y: "2014",
+                    a: 110,
+                    b: 130
+                }, {
+                    y: "2015",
+                    a: 90,
+                    b: 110
+                }, {
+                    y: "2016",
+                    a: 120,
+                    b: 140
+                }, {
+                    y: "2017",
+                    a: 110,
+                    b: 125
+                }, {
+                    y: "2018",
+                    a: 170,
+                    b: 190
+                }, {
+                    y: "2019",
+                    a: 120,
+                    b: 140
+                }],
+                xkey: "y",
+                ykeys: ["a", "b"],
+                hideHover: "auto",
+                gridLineColor: "#eef0f2",
+                resize: !0,
+                barSizeRatio: .4,
+                labels: ["7 ngày trước", "Hôm nay"]
+            })
+        </script>
+
+    }

@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Ads</h4>
+
+                <div class="page-title-right">
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="Create()"><i class="glyphicon glyphicon-plus"></i> Thêm mới</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12" ng-controller="IndexController" ng-cloak>
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title">Thu nhập từ 10-01-2021 đến 17-01-2021</h4>
+
+                    <table id="myTable" class="table table-hover"></table>
+                    <!-- Large modal -->
+                    <div class="modal fade" id="PnModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title">{{ UpdateMode ? "Cập nhật" : "Thêm mới" }}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="SystemEnable" ng-model="Ads.SystemEnable"> System enable
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light" data-dismiss="modal">Đóng</button>
+                                    <button type="submit" class="btn btn-primary" ng-disabled="frmModal.$invalid" ng-click="Save()">{{ UpdateMode ? "Cập nhật" : "Thêm" }}</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/script-handler/ads/index-controller.js"></script>
+}

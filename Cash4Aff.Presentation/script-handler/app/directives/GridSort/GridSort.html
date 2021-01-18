@@ -1,0 +1,11 @@
+﻿<div class="divSort">
+    <div>
+        <i class="fa fa-sort-numeric-asc" aria-hidden="true"
+           ng-class="{'active' : sort.ColActived == columnName && sort.Type == 'asc'}" 
+           ng-click="sort.SortClient = '+' + columnName; sort.Type = 'asc'; sort.ColActived = columnName; fnCallBack();"></i>
+
+        <i class="fa fa-sort-numeric-desc" aria-hidden="true" 
+           ng-class="{'active' : sort.ColActived == columnName && sort.Type == 'desc'}" 
+           ng-click="sort.SortClient = '-' + columnName; sort.Type = 'desc'; sort.ColActived = columnName;fnCallBack();"></i>
+    </div>
+</div>  

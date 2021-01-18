@@ -1,0 +1,52 @@
+﻿<div class="input-group mycustomjstree" get-width="myroot.Width">
+    <div class="input">
+        <div class="dropdown">
+            <input class="dropdown_HelpTrees form-control" ng-disabled="myroot.IsDisableOpenTree" placeholder="{{myroot.placeholder}}" style="cursor: pointer;" ng-style="{'background': (!myroot.IsDisableOpenTree)? '#fff':'#eee'}" type="text" data-toggle="{{ !myroot.IsDisableOpenTree ? 'dropdown' : 'blab'}}" id="ddlFilterStoreA" readonly="readonly" ng-model="myroot.NodeResult.NameSelected" />
+            <span ng-show="myroot.NodeResult.NameSelected.length > 0 && myroot.ShowClearSelected" 
+                  style="cursor: pointer; position: absolute; right: 6px; z-index: 1001; top: 7px;"
+                  title="Bỏ chọn"
+                    ng-click="myroot_ClearSelected_Onclick()">
+            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+            </span>
+            <div class="keep-open dropdown-menu"
+                 style="padding:0;margin-top: 30px;top:0px;width:{{myroot.Width}}px; overflow:auto;">
+                <div class="col-sm-12 col-md-12 col-lg-12" style="padding: 5px 5px 0px 5px; " ng-show="myroot.IsSearchActived">
+
+                    <input class="ng-tree-search searchInput_HelpTrees form-control"
+                           style="margin-bottom:5px;"
+                           placeholder="Nhập từ khóa cần tìm"
+                           ng-model="myroot.txtKeySearch.Text">
+                </div>
+                <div class="scrollable-menu" style="max-width:{{myroot.Width}}px; max-height:400px;">
+                    <div class="ngHelpTreesPlugins col-sm-12 col-md-12 col-lg-12"
+                         style="height: 20px; margin: 5px 5px 5px -5px;display:table-cell; "
+                         ng-show="!myroot.IsSearchFound">
+                        <label>
+                            Không tìm thấy
+                        </label>
+                    </div>
+                    <div class="ngHelpTreesPlugins col-sm-12 col-md-12 col-lg-12"
+                         style="height: 20px; margin: 5px 5px 5px -5px;display:table-cell; "
+                         ng-show="myroot.IsChkAllActived && myroot.IsSearchFound && !myroot.IsHideChkAll">
+                        <label>
+                            <input type="checkbox" class="checkbox style-0" ng-model="myroot.IsCheckedAll" ng-click="myroot_IsSelectedAll_Onclick()">
+                            <span>Chọn tất cả</span>
+                        </label>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="ngHelpTrees" data-style="checkbox" ng-show="myroot.IsSearchFound">
+                        <js-tree-ver2 id="{{myroot.IDTree}}"
+                                 myroot="myroot"
+                                 tree-data="myroot.TreeData"
+                                 tree-core="myroot.core"
+                                 tree-search="myroot.txtKeySearch.Text"
+                                 tree-plugins="{{attrs.treePlugins}}"></js-tree-ver2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="input-group-addon" style="cursor:pointer;min-width:34px">
+        <i class="fa fa-angle-down"></i>
+    </span>
+</div>  

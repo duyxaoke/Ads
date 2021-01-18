@@ -1,0 +1,171 @@
+﻿    <!DOCTYPE html>
+<html>
+<head>
+    <title>Dịch vụ hoàn tiền khi mua sắm trực tuyến - Cash4Aff.vn</title>
+    <!--== META TAGS ==-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="theme-color" content="#76cef1" />
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <!--== FAV ICON(BROWSER TAB ICON) ==-->
+    <link rel="shortcut icon" href="~/Content/landing-page/images/fav.ico" type="image/x-icon">
+    <!--== GOOGLE FONTS ==-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--== CSS FILES ==-->
+    <link href="~/Content/landing-page/css/product.css" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="~/Content/landing-page/js/html5shiv.js"></script>
+    <script src="~/Content/landing-page/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+    <section>
+        <div class="land-full land-3-top-full">
+            <div class="land-container">
+                <div class="land-3-top">
+                    <div class="land-3-top-logo">
+                        <a href="#"><img src="~/Content/landing-page/images/logover.png"></a>
+                    </div>
+                    <div class="land-3-top-contact">
+                        <ul>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li><a href="@Url.Action("Index","Dashboards", new { Area = "Admin" })">Trang quản lý</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@Url.Action("Login","Account")">Đăng nhập</a></li>
+                            }
+                            <li><a href="https://chrome.google.com/webstore/detail/Cash4Aff-gi%E1%BA%A3m-th%C3%AAm-%25-khi-mu/phcllbjfneckghbephklclojogaljihh" target="_blank">Cài đặt extension</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+
+        <div class="land-full pro-banner">
+            <div class="land-container">
+                <div class="pro-banner-inn">
+                    <h1>Mua sắm trực tuyến <span>được giảm thêm đến 6%</span></h1>
+                    <p>Bằng cách nào? Hãy click vào bên dưới và cài đặt, ngoài mã giảm giá, khuyến mãi, bạn còn được giảm thêm đến 6%.</p>
+
+
+                    <div id="DIV_1">
+                        <a href="#" id="A_2">
+                            <img src="~/Content/landing-page/images/Google_Chrome.svg" alt="Google_Chrome browser" id="IMG_3" />
+                            Thêm vào chorme
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+
+
+        <div class="land-full free-book">
+            <div class="land-container">
+                <h2 style="text-align:center;margin-bottom: 20px;">Các bước để nhận được ưu đãi</h2>
+                <div class="pro-fea-inn">
+                    <ul>
+                        <li style="width:33.3333%">
+                            <div class="fea-com fade-in one" style="height: 270px;">
+                                <img src="~/Content/landing-page/images/product/g3.png" alt="">
+                                <h4>Cài đặt tiện ích Cash4Aff extension</h4>
+                                <a href="https://chrome.google.com/webstore/detail/Cash4Aff-gi%E1%BA%A3m-th%C3%AAm-%25-khi-mu/phcllbjfneckghbephklclojogaljihh" target="_blank">Cài đặt tại đây</a>
+
+                            </div>
+                        </li>
+                        <li style="width:33.3333%">
+                            <div class="fea-com fade-in two" style="height: 270px;">
+                                <img src="~/Content/landing-page/images/product/g6.png" alt="">
+                                <h4>Mua hàng từ các cửa hàng yêu thích của bạn</h4>
+                                <p>Bạn chỉ cần làm mọi thứ như mọi khi, và chúng tôi sẽ làm tất cả để bạn có lại một phần trong tổng số tiền chi mua hàng.</p>
+                            </div>
+                        </li>
+                        <li style="width:33.3333%">
+                            <div class="fea-com fade-in three" style="height: 270px;">
+                                <img src="~/Content/landing-page/images/product/money.png" alt="">
+                                <h4>Nhận tiền hoàn lại từ những lần giao dịch của bạn</h4>
+                                <p>Rút tiền nhanh chóng bằng các phương thức tiện lợi. Bạn có thể rút tiền mặt mà không cần hoa hồng và phụ phí gì khác.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        @RenderBody()
+    </section>
+    <!-- COPY RIGHTS -->
+    <section>
+        <div class="land-full land-1-foot-full">
+            <div class="land-container">
+                <div class="land-1-foot-text">
+                    <p>Copyrights © 2018  <a href="https://Cash4Aff.vn/">Cash4Aff.vn</a> All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @*<div id="footer_cm">
+            <span>Mã giảm giá từ Cash4Aff.vn:</span><br />
+            <table>
+                <tr>
+                    <td>Giảm thêm 5%:</td>
+                    <th><a class="promotion_a" title="Giảm thêm 8%"><span class="promotion_span">8NXC03 </span></a></th>
+                </tr>
+                <tr>
+                    <td>Giảm thêm 5%:</td>
+                    <th><a class="promotion_a" title="Giảm thêm 8%"><span class="promotion_span">8NXC03 </span></a></th>
+                </tr>
+                <tr>
+                    <td>Giảm thêm 5%:</td>
+                    <th><a class="promotion_a" title="Giảm thêm 8%"><span class="promotion_span">8NXC03 </span></a></th>
+                </tr>
+            </table>
+        </div>*@
+
+    @*<style>
+            #footer_cm {
+                position: fixed;
+                bottom: 0;
+                width: 330px;
+                z-index: 99999;
+                background: #e6fcff;
+                line-height: 2;
+                float: right;
+                color: #000;
+                font-size: 15px;
+                font-family: sans-serif;
+                font-weight: bold;
+                padding: 10px;
+                box-shadow: 0 0 15px #00214B;
+                right: 0;
+                border-radius: 5px;
+            }
+        </style>*@
+    <!--SCRIPTS-->
+    <script src="~/Content/landing-page/js/main.min.js"></script>
+    <script src="~/Content/landing-page/js/custom.js"></script>
+    <script src="~/Content/landing-page/js/mail.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,24 @@
+﻿<div ng-show="pager.TotalPages > 0" style="float: left; margin-top: 10px; color: #b00f0f; font-weight: bold;">
+    Tổng cộng: {{pager.TotalItems|number}} dòng
+</div>
+<ul ng-if="pager.Pages.length" class="pagination" style="margin: 0px;padding: 0px; margin-bottom: -5px;">
+    <li style="cursor:pointer;" ng-show="pager.EndPage > 10">
+        <!--&& pager.TotalPages > 10-->
+        <a ng-click="ExecFirst(pager.CurrentPage - 10)">
+            ...
+        </a>
+    </li>
+    <!-- loop -->
+    <li ng-repeat="page in pager.Pages" ng-class="{active:pager.CurrentPage === page}" style="cursor:pointer;">
+        <a ng-if="pager.CurrentPage == page">{{page}}</a>
+        <a ng-if="pager.CurrentPage != page" ng-click="Exec(page);">{{page}}</a>
+    </li>
+    <li style="cursor:pointer;" ng-show="pager.TotalPages > 10 && pager.EndPage < pager.TotalPages">
+        <!--ng-class="{disabled:pager.CurrentPage > 10 }"-->
+
+        <a ng-click="ExecLast(pager.CurrentPage + 10)">...</a>
+    </li>
+</ul>
+<!--<br />
+<br />
+pager : {{pager}}-->

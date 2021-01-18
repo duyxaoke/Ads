@@ -1,0 +1,162 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Xeloro - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/Content/vertical/assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="~/Content/vertical/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/vertical/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/vertical/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+    <!-- Plugins css -->
+    <link href="~/Content/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+
+<body ng-app="MyApp">
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <div class="header-border"></div>
+        <header id="page-topbar">
+            <div class="navbar-header">
+
+                <div class="d-flex align-items-left">
+                    <button type="button" class="btn btn-sm mr-2 d-lg-none px-3 font-size-16 header-item waves-effect"
+                            id="vertical-menu-btn">
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
+                </div>
+
+                <div class="d-flex align-items-center">
+
+                    <div class="dropdown d-inline-block ml-2">
+                        <button type="button" class="btn header-item waves-effect"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user" src="~/Content/vertical/assets/images/users/avatar-2.jpg"
+                                 alt="Header Avatar">
+                            <span class="d-none d-sm-inline-block ml-1">Tran Duy</span>
+                            <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item d-flex align-items-center justify-content-between"
+                               href="javascript:void(0)">
+                                <span>Profile</span>
+                                <span>
+                                    <span class="badge badge-pill badge-warning">1</span>
+                                </span>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center justify-content-between"
+                               href="javascript:void(0)">
+                                <span>Log Out</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- ========== Left Sidebar Start ========== -->
+        @Html.Action("Sidebar", "Template", new { Area = "" })
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                @RenderBody()
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            2020 © Xeloro.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-right d-none d-sm-block">
+                                Design & Develop by Myra
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+    <!-- Overlay-->
+    <div class="menu-overlay"></div>
+
+    <!-- END layout-wrapper -->
+    <!-- ./wrapper -->
+    <script src="~/content/static/bundle.js"></script>
+    <script src="~/script-handler/app/app-bundle.js"></script>
+    <script>
+        var MasterData = {};
+    </script>
+
+    <!-- jQuery  -->
+        <script src="~/Content/vertical/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="~/Content/vertical/assets/js/metismenu.min.js"></script>
+        <script src="~/Content/vertical/assets/js/waves.js"></script>
+        <script src="~/Content/vertical/assets/js/simplebar.min.js"></script>
+        <script src="~/Content/plugins/toastr/toastr.min.js"></script>
+        <script src="~/Content/site.js"></script>
+
+        <!-- jstree Js-->
+        <script src="~/Content/plugins/jsTree/jstree.js"></script>
+
+        <!-- Morris Js-->
+        <script src="~/Content/plugins/morris-js/morris.min.js"></script>
+
+        <!-- Raphael Js-->
+        <script src="~/Content/plugins/raphael/raphael.min.js"></script>
+
+        <!-- App js -->
+        <script src="~/Content/vertical/assets/js/theme.js"></script>
+
+        <!-- third party js -->
+        <script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/Content/plugins/datatables/dataTables.bootstrap4.js"></script>
+        <script src="~/Content/plugins/datatables/dataTables.responsive.min.js"></script>
+        <script src="~/Content/plugins/datatables/responsive.bootstrap4.min.js"></script>
+        <script src="~/Content/plugins/datatables/dataTables.buttons.min.js"></script>
+        <script src="~/Content/plugins/datatables/buttons.bootstrap4.min.js"></script>
+        <script src="~/Content/plugins/datatables/buttons.html5.min.js"></script>
+        <script src="~/Content/plugins/datatables/buttons.flash.min.js"></script>
+        <script src="~/Content/plugins/datatables/buttons.print.min.js"></script>
+        <script src="~/Content/plugins/datatables/dataTables.keyTable.min.js"></script>
+        <script src="~/Content/plugins/datatables/dataTables.select.min.js"></script>
+        <script src="~/Content/plugins/datatables/pdfmake.min.js"></script>
+        <script src="~/Content/plugins/datatables/vfs_fonts.js"></script>
+        <!-- third party js ends -->
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        HttpCookie userCookie = new HttpCookie("userid");
+        userCookie.Value = User.Identity.GetUserId();
+        userCookie.Expires = DateTime.Now.AddYears(100);
+        //userCookie.Path = "/Redirect";
+        Response.SetCookie(userCookie);
+    }
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

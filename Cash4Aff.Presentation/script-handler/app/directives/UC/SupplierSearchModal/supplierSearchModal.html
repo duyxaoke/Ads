@@ -1,0 +1,65 @@
+﻿<div class="modal fade PnSupplierSearchModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding:15px 15px 0px">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title"><strong>Tìm kiếm nhà cung cấp</strong></h4>
+            </div>
+            <div class="modal-body" style="padding:5px 5px 10px">
+                <div class="widget-body">
+                    <div class="clearfix well" style="padding:5px">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="Tên NCC, địa chỉ, số điện thoại, email" type="text" ng-model="PnSupplierSearchModal.txtSearch.Text">
+                            <span class="input-group-addon">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table class="table table-bordered table-hover table-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center; width:100px;">
+                                        Tên KH / NCC
+                                    </th>
+                                    <th style="text-align:center">
+                                        Địa chỉ
+                                    </th>
+                                    <th style="text-align:center">
+                                        Số điện thoại
+                                    </th>
+                                    <th style="text-align:center">
+                                        Email
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in PnSupplierSearchModal.LstOrder = (PnSupplierSearchModal.LstFilter = (PnSupplierSearchModal.Lst | filter : PnSupplierSearchModal.CustomFilter)  | orderBy: PnSupplierSearchModal.Sort.SortClient) | limitTo: PnSupplierSearchModal.Pager.PageSize: PnSupplierSearchModal.Pager.StartIndex">
+                                    <td class="col-md-2">
+                                        <a ng-click="PnSupplierSearchModal.ChooseProduct(item)" href="javascript:void(0);"> {{item.SupplierName }}</a>
+                                    </td>
+                                    <td class="col-md-2">{{item.SupplierAddress}}</td>
+                                    <td class="col-md-2">{{item.SupplierPhone}}</td>
+                                    <td class="col-md-2">{{item.SupplierEmail}}</td>
+                                </tr>
+                                <tr ng-show="PnSupplierSearchModal.LstOrder.length == 0" style="text-align:center">
+                                    <td colspan="4">Không có dữ liệu</td>
+                                </tr>
+                                <tr ng-hide="PnSupplierSearchModal.LstOrder.length == 0">
+                                    <td colspan="4">
+                                        <div style="text-align:right;padding:0px;">
+                                            <pagination-style1 total-items="PnSupplierSearchModal.LstFilter.length" pager="PnSupplierSearchModal.Pager" fn-call-back="PnSupplierSearchModal.btnSearch.OnClick(PageClicked)"></pagination-style1>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="clear:both;"></div>

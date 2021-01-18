@@ -1,0 +1,12 @@
+﻿<ul ng-show="pager.TotalItems > 0" class="pagination" style="margin:0">
+    <li ng-class="{disabled:pager.CurrentPage === 1}">
+        <a href="javascript:void(0)" ng-click="Exec(pager.CurrentPage - 1,$event)" style="margin-right:10px" title="Trang trước">
+            <i class="fa fa-caret-left"></i>
+        </a>
+    </li>
+    <li ng-class="{disabled:pager.CurrentPage === pager.MaxPage}">
+        <a href="javascript:void(0)" ng-click="Exec(pager.CurrentPage + 1,$event)" title="Trang sau">
+            <i class="fa fa-caret-right"></i>
+        </a>
+    </li>
+</ul>

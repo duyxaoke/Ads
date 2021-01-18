@@ -1,0 +1,47 @@
+﻿@model Cash4Aff.Presentation.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() > 0)
+    {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="mt-4 text-center">
+                <h5 class="font-size-14 mb-3">Đăng nhập bằng</h5>
+                <ul class="list-inline">
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        if (p.AuthenticationType == "Facebook")
+                        {
+                            <li class="list-inline-item">
+                                <button type="submit"
+                                        id="@p.AuthenticationType"
+                                        name="provider" value="@p.AuthenticationType"
+                                        class="social-list-item bg-primary text-white border-primary">
+                                    <i class="mdi mdi-facebook"></i>
+                                </button>
+                            </li>
+                        }
+                        if (p.AuthenticationType == "Google")
+                        {
+                            <li class="list-inline-item">
+                                <button type="submit" class="social-list-item bg-danger text-white border-danger" id="@p.AuthenticationType"
+                                        name="provider" value="@p.AuthenticationType">
+                                    <i class="mdi mdi-google"></i>
+                                </button>
+                            </li>
+                        }
+                    }
+                    @*<li class="list-inline-item">
+                        <a href="javascript::void()" class="social-list-item bg-info text-white border-info">
+                            <i class="mdi mdi-twitter"></i>
+                        </a>
+                    </li>*@
+                </ul>
+            </div>
+        }
+    }
+}

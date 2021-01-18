@@ -1,0 +1,71 @@
+﻿<!--Box Customer search-->
+<div class="modal fade PnCustomerSearchModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding:15px 15px 0px">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title"><strong>Tìm kiếm khách hàng</strong></h4>
+            </div>
+            <div class="modal-body" style="padding:5px 5px 10px">
+                <div class="widget-body">
+                    <div class="clearfix well" style="padding:5px">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="Tên KH, điện thoại KH" type="text" 
+                                   when-enter="PnCustomerSearchModal.btnSearch.OnClick(1)"
+                                   ng-model="PnCustomerSearchModal.txtSearch.Text">
+                            <div class="input-group-btn">
+                                <button ng-click="PnCustomerSearchModal.btnSearch.OnClick(1)" class="btn btn-default margin-left-5 cc-btn-style cc-btn-color-violet"><i class="fa fa-search"></i> Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table class="table table-bordered table-hover table-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="width:125px;">
+                                        Mã KH
+                                    </th>
+                                    <th>
+                                        Họ tên
+                                    </th>
+                                    <th style="width:125px;">
+                                        Điện thoại
+                                    </th>
+                                    <th>
+                                        Địa chỉ
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in PnCustomerSearchModal.LstFilter = (PnCustomerSearchModal.Lst | limitTo: PnCustomerSearchModal.Pager.PageSize: PnCustomerSearchModal.Pager.StartIndex)">
+                                    <td>
+                                        {{item.CustomerID}}
+                                    </td>
+                                    <td>
+                                        <a ng-click="PnCustomerSearchModal.ChooseItem(item)" href="javascript:void(0);">{{item.CustomerName}}</a>
+                                    </td>
+                                    <td>{{'0' + item.Phone}}</td>
+                                    <td>{{item.Address}}</td>
+                                </tr>
+                                <tr ng-show="PnCustomerSearchModal.Lst.length == 0" style="text-align:center">
+                                    <td colspan="4">Không có dữ liệu</td>
+                                </tr>
+                                <tr ng-hide="PnCustomerSearchModal.Lst.length == 0">
+                                    <td colspan="4">
+                                        <div style="text-align:right;padding:0px;">
+                                            <!--<pagination-style1 total-items="PnCustomerSearchModal.Pager.TotalItems" pager="PnCustomerSearchModal.Pager" fn-call-back="PnCustomerSearchModal.btnSearch.OnClick(PageClicked)"></pagination-style1>-->
+                                            <pagination-style2 total-items="PnCustomerSearchModal.Lst.length" pager="PnCustomerSearchModal.Pager" fn-call-back="PnCustomerSearchModal.btnSearch.OnLoad(PageClicked)"></pagination-style2>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Box Customer search-->

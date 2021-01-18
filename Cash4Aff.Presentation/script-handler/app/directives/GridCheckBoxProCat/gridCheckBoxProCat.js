@@ -1,0 +1,26 @@
+﻿var gridCheckBoxProCat = function ($timeout) {
+    return {
+        restrict: "E",
+
+        scope: {
+            chkModel: "=",
+            parentRow: "=",
+            childRows: "=",
+            fnCallBack: "&"
+        },
+        link: function (scope, element, attrs) {
+            scope.$watch('chkModel', function (value) {
+                //scope.fnCallBack({ ParentRow: scope.parentRow, ChildRows: scope.childRows });
+                scope.parentRow.IsAll = true;
+                $.each(scope.childRows, function (index, item) {
+                    if (!item.IsAll) {
+                        scope.parentRow.IsAll = false;
+                        return false;
+                    }
+                });
+            });
+        }
+    };
+};
+
+gridCheckBoxProCat.$inject = ["$timeout"];
