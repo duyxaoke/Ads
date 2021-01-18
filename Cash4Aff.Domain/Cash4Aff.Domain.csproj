@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="Entities\UserViewedAds.cs" />
     <Compile Include="Entities\Ads.cs" />
     <Compile Include="Entities\Balance.cs" />
     <Compile Include="Entities\UserRef.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Entities\Menu.cs" />
     <Compile Include="Entities\Withdraw.cs" />
     <Compile Include="Helpers\Command.cs" />
+    <Compile Include="Interfaces\Repositories\IUserViewedAdsRepository.cs" />
     <Compile Include="Interfaces\Repositories\IAdsRepository.cs" />
     <Compile Include="Interfaces\Repositories\IBalanceRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserRefRepository.cs" />

@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\IApplication.cs" />
+    <Compile Include="Application\ICashMe\IUserViewedAdsAppService.cs" />
     <Compile Include="Application\ICashMe\IAdsAppService.cs" />
     <Compile Include="Application\ICashMe\IBalanceAppService.cs" />
     <Compile Include="Application\ICashMe\IUserRefAppService.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
+    <Compile Include="CashMe\UserViewedAdsAppService.cs" />
     <Compile Include="CashMe\AdsAppService.cs" />
     <Compile Include="CashMe\BalanceAppService.cs" />
     <Compile Include="CashMe\UserRefAppService.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="Application\IMenuAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\CashMe\UserViewedAdsViewModel.cs" />
     <Compile Include="ViewModels\CashMe\AdsViewModel.cs" />
     <Compile Include="ViewModels\CashMe\BalanceViewModel.cs" />
     <Compile Include="ViewModels\CashMe\UserRefViewModel.cs" />

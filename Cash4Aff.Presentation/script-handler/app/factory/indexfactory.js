@@ -235,9 +235,6 @@ var CommonFactory = function ($rootScope, $localstorage, $timeout, UtilFactory, 
         if (config && config.CacheKeyClient) {
             $localstorage.remove(config.CacheKeyClient);
         }
-        let codeStep = jQuery.extend({}, ApiHelper.CodeStep);
-        codeStep.ConcungContextID = UtilJS.guid().replace(/-/g, "");
-
         let defer = $q.defer();
         var req = {
             method: 'POST',
@@ -251,13 +248,7 @@ var CommonFactory = function ($rootScope, $localstorage, $timeout, UtilFactory, 
         }
         service.WriteLog(url, data);
         $http(req).then(function (jqXHR) {
-            let response = jqXHR.data;
-            if (response.objCodeStep.Status == service.JsonStatusCode.Error
-                || response.objCodeStep.Status == service.JsonStatusCode.Warning) { 
-                defer.reject(response);
-            } else {
-                defer.resolve(response);
-            }
+            defer.resolve(jqXHR.data);
         }, function (jqXHR) {
             if (jqXHR.status == 401 || jqXHR.status == 440 || jqXHR.status == 0 || jqXHR.status == -1)
             {
@@ -280,9 +271,6 @@ var CommonFactory = function ($rootScope, $localstorage, $timeout, UtilFactory, 
         if (config && config.CacheKeyClient) {
             $localstorage.remove(config.CacheKeyClient);
         }
-        let codeStep = jQuery.extend({}, ApiHelper.CodeStep);
-        codeStep.ConcungContextID = UtilJS.guid().replace(/-/g, "");
-
         let defer = $q.defer();
         var req = {
             method: 'GET',
@@ -295,13 +283,7 @@ var CommonFactory = function ($rootScope, $localstorage, $timeout, UtilFactory, 
         }
         service.WriteLog(url, data);
         $http(req).then(function (jqXHR) {
-            let response = jqXHR.data;
-            if (response.objCodeStep.Status == service.JsonStatusCode.Error
-                || response.objCodeStep.Status == service.JsonStatusCode.Warning) {
-                defer.reject(response);
-            } else {
-                defer.resolve(response);
-            }
+            defer.resolve(jqXHR.data);
         }, function (jqXHR) {
             if (jqXHR.status == 401 || jqXHR.status == 440 || jqXHR.status == 0 || jqXHR.status == -1) {
                 let obj = { status: 401 };

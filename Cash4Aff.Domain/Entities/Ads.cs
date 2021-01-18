@@ -12,8 +12,11 @@ namespace Cash4Aff.Domain.Entities
         [StringLength(500)]
         public string Description { get; set; }
         [Column(TypeName = "nvarchar")]
-        [StringLength(200)]
+        [StringLength(400)]
         public string Url { get; set; }
+        [Column(TypeName = "nvarchar")]
+        [StringLength(400)]
+        public string ImageUrl { get; set; }
         public decimal Price { get; set; }
         public int SecondView { get; set; }
     }

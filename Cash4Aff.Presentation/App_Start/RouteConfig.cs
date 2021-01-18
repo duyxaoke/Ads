@@ -34,7 +34,8 @@ namespace Cash4Aff.Presentation
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                 namespaces: new[] { "Cash4Aff.Presentation.Controllers" }
             );
         }
     }

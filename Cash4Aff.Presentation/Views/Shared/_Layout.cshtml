@@ -1,171 +1,230 @@
-﻿    <!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Dịch vụ hoàn tiền khi mua sắm trực tuyến - Cash4Aff.vn</title>
-    <!--== META TAGS ==-->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="theme-color" content="#76cef1" />
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <!--== FAV ICON(BROWSER TAB ICON) ==-->
-    <link rel="shortcut icon" href="~/Content/landing-page/images/fav.ico" type="image/x-icon">
-    <!--== GOOGLE FONTS ==-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--== CSS FILES ==-->
-    <link href="~/Content/landing-page/css/product.css" rel="stylesheet" />
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="~/Content/landing-page/js/html5shiv.js"></script>
-    <script src="~/Content/landing-page/js/respond.min.js"></script>
-    <![endif]-->
+    <meta charset="utf-8" />
+    <title> Xeloro - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/Content/vertical/assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="~/Content/vertical/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/vertical/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/vertical/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+    <!-- Plugins css -->
+    <link href="~/Content/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="~/content/plugins/toastr/toastr.min.css" rel="stylesheet" />
+    <!-- Sweet Alerts css -->
+    <link href="~/content/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+
 </head>
-<body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div id="status">&nbsp;</div>
-    </div>
-    <section>
-        <div class="land-full land-3-top-full">
-            <div class="land-container">
-                <div class="land-3-top">
-                    <div class="land-3-top-logo">
-                        <a href="#"><img src="~/Content/landing-page/images/logover.png"></a>
-                    </div>
-                    <div class="land-3-top-contact">
-                        <ul>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li><a href="@Url.Action("Index","Dashboards", new { Area = "Admin" })">Trang quản lý</a></li>
-                            }
-                            else
-                            {
-                                <li><a href="@Url.Action("Login","Account")">Đăng nhập</a></li>
-                            }
-                            <li><a href="https://chrome.google.com/webstore/detail/Cash4Aff-gi%E1%BA%A3m-th%C3%AAm-%25-khi-mu/phcllbjfneckghbephklclojogaljihh" target="_blank">Cài đặt extension</a></li>
-                        </ul>
-                    </div>
+
+<body ng-app="MyApp">
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <div class="header-border"></div>
+        <header id="page-topbar">
+            <div class="navbar-header">
+
+                <div class="d-flex align-items-left">
+                    <button type="button" class="btn btn-sm mr-2 d-lg-none px-3 font-size-16 header-item waves-effect"
+                            id="vertical-menu-btn">
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <section>
+                <div class="d-flex align-items-center">
 
-        <div class="land-full pro-banner">
-            <div class="land-container">
-                <div class="pro-banner-inn">
-                    <h1>Mua sắm trực tuyến <span>được giảm thêm đến 6%</span></h1>
-                    <p>Bằng cách nào? Hãy click vào bên dưới và cài đặt, ngoài mã giảm giá, khuyến mãi, bạn còn được giảm thêm đến 6%.</p>
-
-
-                    <div id="DIV_1">
-                        <a href="#" id="A_2">
-                            <img src="~/Content/landing-page/images/Google_Chrome.svg" alt="Google_Chrome browser" id="IMG_3" />
-                            Thêm vào chorme
-                        </a>
+                    <div class="dropdown d-inline-block ml-2">
+                        <button type="button" class="btn header-item waves-effect"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user" src="~/Content/vertical/assets/images/users/avatar-2.jpg"
+                                 alt="Header Avatar">
+                            <span class="d-none d-sm-inline-block ml-1">Tran Duy</span>
+                            <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item d-flex align-items-center justify-content-between"
+                               href="javascript:void(0)">
+                                <span>Profile</span>
+                                <span>
+                                    <span class="badge badge-pill badge-warning">1</span>
+                                </span>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center justify-content-between"
+                               href="javascript:void(0)">
+                                <span>Log Out</span>
+                            </a>
+                        </div>
                     </div>
-
 
                 </div>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <section>
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
 
+            <div data-simplebar class="h-100">
 
-        <div class="land-full free-book">
-            <div class="land-container">
-                <h2 style="text-align:center;margin-bottom: 20px;">Các bước để nhận được ưu đãi</h2>
-                <div class="pro-fea-inn">
-                    <ul>
-                        <li style="width:33.3333%">
-                            <div class="fea-com fade-in one" style="height: 270px;">
-                                <img src="~/Content/landing-page/images/product/g3.png" alt="">
-                                <h4>Cài đặt tiện ích Cash4Aff extension</h4>
-                                <a href="https://chrome.google.com/webstore/detail/Cash4Aff-gi%E1%BA%A3m-th%C3%AAm-%25-khi-mu/phcllbjfneckghbephklclojogaljihh" target="_blank">Cài đặt tại đây</a>
+                <div class="navbar-brand-box">
+                    <a href="index.html" class="logo">
+                        <i class="mdi mdi-album"></i>
+                        <span>
+                            Xeloro
+                        </span>
+                    </a>
+                </div>
 
-                            </div>
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li class="menu-title">Menu</li>
+
+                        <li>
+                            <a href="index.html" class="waves-effect">
+                                <i class="mdi mdi-home-analytics"></i><span>Dashboard</span>
+                            </a>
                         </li>
-                        <li style="width:33.3333%">
-                            <div class="fea-com fade-in two" style="height: 270px;">
-                                <img src="~/Content/landing-page/images/product/g6.png" alt="">
-                                <h4>Mua hàng từ các cửa hàng yêu thích của bạn</h4>
-                                <p>Bạn chỉ cần làm mọi thứ như mọi khi, và chúng tôi sẽ làm tất cả để bạn có lại một phần trong tổng số tiền chi mua hàng.</p>
-                            </div>
+                        <li>
+                            <a href="index.html" class="waves-effect">
+                                <i class="mdi mdi-home-analytics"></i><span>Kiếm tiền</span>
+                            </a>
                         </li>
-                        <li style="width:33.3333%">
-                            <div class="fea-com fade-in three" style="height: 270px;">
-                                <img src="~/Content/landing-page/images/product/money.png" alt="">
-                                <h4>Nhận tiền hoàn lại từ những lần giao dịch của bạn</h4>
-                                <p>Rút tiền nhanh chóng bằng các phương thức tiện lợi. Bạn có thể rút tiền mặt mà không cần hoa hồng và phụ phí gì khác.</p>
-                            </div>
+                        <li>
+                            <a href="index.html" class="waves-effect">
+                                <i class="mdi mdi-home-analytics"></i><span>Tuyến dưới</span>
+                            </a>
                         </li>
+                        <li>
+                            <a href="index.html" class="waves-effect">
+                                <i class="mdi mdi-home-analytics"></i><span>Báo cáo</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="waves-effect">
+                                <i class="mdi mdi-home-analytics"></i><span>Rút tiền</span>
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
+                <!-- Sidebar -->
             </div>
         </div>
-    </section>
+        <!-- Left Sidebar End -->        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
 
-    <section>
-        @RenderBody()
-    </section>
-    <!-- COPY RIGHTS -->
-    <section>
-        <div class="land-full land-1-foot-full">
-            <div class="land-container">
-                <div class="land-1-foot-text">
-                    <p>Copyrights © 2018  <a href="https://Cash4Aff.vn/">Cash4Aff.vn</a> All rights reserved.</p>
+            <div class="page-content">
+                @RenderBody()
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            2020 © Xeloro.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-right d-none d-sm-block">
+                                Design & Develop by Myra
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </footer>
+
         </div>
-    </section>
+        <!-- end main content-->
 
-    @*<div id="footer_cm">
-            <span>Mã giảm giá từ Cash4Aff.vn:</span><br />
-            <table>
-                <tr>
-                    <td>Giảm thêm 5%:</td>
-                    <th><a class="promotion_a" title="Giảm thêm 8%"><span class="promotion_span">8NXC03 </span></a></th>
-                </tr>
-                <tr>
-                    <td>Giảm thêm 5%:</td>
-                    <th><a class="promotion_a" title="Giảm thêm 8%"><span class="promotion_span">8NXC03 </span></a></th>
-                </tr>
-                <tr>
-                    <td>Giảm thêm 5%:</td>
-                    <th><a class="promotion_a" title="Giảm thêm 8%"><span class="promotion_span">8NXC03 </span></a></th>
-                </tr>
-            </table>
-        </div>*@
+    </div>
+    <!-- END layout-wrapper -->
+    <!-- Overlay-->
+    <div class="menu-overlay"></div>
 
-    @*<style>
-            #footer_cm {
-                position: fixed;
-                bottom: 0;
-                width: 330px;
-                z-index: 99999;
-                background: #e6fcff;
-                line-height: 2;
-                float: right;
-                color: #000;
-                font-size: 15px;
-                font-family: sans-serif;
-                font-weight: bold;
-                padding: 10px;
-                box-shadow: 0 0 15px #00214B;
-                right: 0;
-                border-radius: 5px;
-            }
-        </style>*@
-    <!--SCRIPTS-->
-    <script src="~/Content/landing-page/js/main.min.js"></script>
-    <script src="~/Content/landing-page/js/custom.js"></script>
-    <script src="~/Content/landing-page/js/mail.js"></script>
+    <div class="position-absolute w-100 d-flex flex-column p-4">
+        <div class="toast ml-auto" role="alert" data-delay="700" data-autohide="false">
+            <div class="toast-header">
+                <strong class="mr-auto text-primary">Thông báo</strong>
+                <small class="text-muted">3 mins ago</small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="toast-body"> Hey, there! This is a Bootstrap 4 toast. </div>
+        </div>
+    </div>
 
+
+    <!-- END layout-wrapper -->
+    <!-- ./wrapper -->
+    <script src="~/content/static/bundle.js"></script>
+    <script src="~/script-handler/app/app-bundle.js"></script>
+    <script>
+        var MasterData = {};
+    </script>
+
+    <!-- jQuery  -->
+    <script src="~/Content/vertical/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/vertical/assets/js/metismenu.min.js"></script>
+    <script src="~/Content/vertical/assets/js/waves.js"></script>
+    <script src="~/Content/vertical/assets/js/simplebar.min.js"></script>
+    <script src="~/Content/plugins/toastr/toastr.min.js"></script>
+    <script src="~/Content/site.js"></script>
+
+    <!-- jstree Js-->
+    <script src="~/Content/plugins/jsTree/jstree.js"></script>
+
+    <!-- Morris Js-->
+    <script src="~/Content/plugins/morris-js/morris.min.js"></script>
+
+    <!-- Raphael Js-->
+    <script src="~/Content/plugins/raphael/raphael.min.js"></script>
+
+    <!-- App js -->
+    <script src="~/Content/vertical/assets/js/theme.js"></script>
+
+    <!-- Sweet Alerts Js-->
+    <script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+    <!-- third party js -->
+    <script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <script src="~/Content/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="~/Content/plugins/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="~/Content/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="~/Content/plugins/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="~/Content/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="~/Content/plugins/datatables/buttons.flash.min.js"></script>
+    <script src="~/Content/plugins/datatables/buttons.print.min.js"></script>
+    <script src="~/Content/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="~/Content/plugins/datatables/dataTables.select.min.js"></script>
+    <script src="~/Content/plugins/datatables/pdfmake.min.js"></script>
+    <script src="~/Content/plugins/datatables/vfs_fonts.js"></script>
+    <!-- third party js ends -->
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        HttpCookie userCookie = new HttpCookie("userid");
+        userCookie.Value = User.Identity.GetUserId();
+        userCookie.Expires = DateTime.Now.AddYears(100);
+        //userCookie.Path = "/Redirect";
+        Response.SetCookie(userCookie);
+    }
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

@@ -63,6 +63,8 @@ namespace Cash4Aff.Presentation
             builder.RegisterType<ConfigAppService>().As<IConfigAppService>().InstancePerDependency();
             builder.RegisterType<AdsRepository>().As<IAdsRepository>().InstancePerLifetimeScope();
             builder.RegisterType<AdsAppService>().As<IAdsAppService>().InstancePerDependency();
+            builder.RegisterType<UserViewedAdsRepository>().As<IUserViewedAdsRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<UserViewedAdsAppService>().As<IUserViewedAdsAppService>().InstancePerDependency();
 
             #region Cash4Aff
             builder.RegisterType<WithdrawRepository>().As<IWithdrawRepository>().InstancePerLifetimeScope();

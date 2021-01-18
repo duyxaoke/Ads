@@ -8,15 +8,16 @@ using DataTablesDotNet.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
+using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http.Description;
 using System.Web.Mvc;
+using WebApiThrottle;
 
 namespace Cash4Aff.Presentation.Areas.Admin.Controllers
 {
     [MvcAuthorizeAttribute]
-    [ClaimsGroup(ClaimResources.Configs)]
 
     public class AdsController : Controller
     {
@@ -27,7 +28,6 @@ namespace Cash4Aff.Presentation.Areas.Admin.Controllers
             _Adservices = Adservices;
         }
 
-        [ClaimsAction(ClaimsActions.Index)]
         public ActionResult Index()
         {
             return View();
@@ -40,30 +40,104 @@ namespace Cash4Aff.Presentation.Areas.Admin.Controllers
             return Json(formattedList, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpPost]
         [ResponseType(typeof(AdsViewModel))]
-        public async Task<ActionResult> GetByIdAsync(int id)
+        public async Task<ActionResult> GetById(int id)
         {
             try
             {
                 var result = await _Adservices.GetByIdAsync(id);
-                return new JsonResult()
+                return Json(new
                 {
-                    Data = new
-                    {
-                        Data = result
-                    },
-                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    MaxJsonLength = Int32.MaxValue
-                };
+                    data = result
+                }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception objEx)
             {
                 return Json(new
                 {
-                    objCodeStep = objEx.Message
+                    message = objEx.Message
                 }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        [HttpPost]
+        [EnableThrottling(PerSecond = 1)]
+        public ActionResult Create(AdsViewModel model)
+        {
+            try
+            {
+                _Adservices.Add(model);
+                return Json(new
+                {
+                    data = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (DbUpdateException ex)
+            {
+                return Json(new
+                {
+                    message = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        [HttpPost]
+        [EnableThrottling(PerSecond = 1)]
+        public ActionResult Update(AdsViewModel model)
+        {
+            try
+            {
+                _Adservices.Update(model);
+                return Json(new
+                {
+                    data = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                return Json(new
+                {
+                    message = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                _Adservices.Remove(id);
+                return Json(new
+                {
+                    data = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    message = ex.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #region Helpers
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _Adservices.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+        private bool Exists(int id)
+        {
+            return _Adservices.GetByIdAsync(id) != null;
+        }
+        #endregion
+
     }
 }

@@ -2,47 +2,78 @@
     ViewBag.Title = "Index";
 }
 
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="IndexController" ng-cloak>
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
                 <h4 class="mb-0 font-size-18">Ads</h4>
 
                 <div class="page-title-right">
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="Create()"><i class="glyphicon glyphicon-plus"></i> Thêm mới</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" ng-click="Create()"><i class="fas fa-plus"></i> Thêm mới</button>
                 </div>
 
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-12" ng-controller="IndexController" ng-cloak>
+        <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
 
                     <h4 class="card-title">Thu nhập từ 10-01-2021 đến 17-01-2021</h4>
 
-                    <table id="myTable" class="table table-hover"></table>
+                    <table id="myTable" class="table table-centered table-striped table-nowrap mb-0"></table>
                     <!-- Large modal -->
                     <div class="modal fade" id="PnModal">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header bg-primary">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ UpdateMode ? "Cập nhật" : "Thêm mới" }}</h5>
+                                    <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title">{{ UpdateMode ? "Cập nhật" : "Thêm mới" }}</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="checkbox">
+                                    <div class="form-group">
                                         <label>
-                                            <input type="checkbox" id="SystemEnable" ng-model="Ads.SystemEnable"> System enable
+                                            Tiêu đề
                                         </label>
+                                        <input type="text" class="form-control" ng-model="Ads.Title" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Mô tả
+                                        </label>
+                                        <input type="text" class="form-control" ng-model="Ads.Description" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Url
+                                        </label>
+                                        <input type="text" class="form-control" ng-model="Ads.Url" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Link hình ảnh
+                                        </label>
+                                        <input type="text" class="form-control" ng-model="Ads.ImageUrl" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Giá
+                                        </label>
+                                        <input type="number" class="form-control" ng-model="Ads.Price" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Thời gian xem
+                                        </label>
+                                        <input type="number" class="form-control" ng-model="Ads.SecondView" required>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-light" data-dismiss="modal">Đóng</button>
-                                    <button type="submit" class="btn btn-primary" ng-disabled="frmModal.$invalid" ng-click="Save()">{{ UpdateMode ? "Cập nhật" : "Thêm" }}</button>
+                                    <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal">Đóng</button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light" ng-disabled="frmModal.$invalid" ng-click="Save()">{{ UpdateMode ? "Cập nhật" : "Thêm" }}</button>
                                 </div>
                             </div>
                             <!-- /.modal-content -->

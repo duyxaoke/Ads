@@ -299,8 +299,7 @@
     <Compile Include="Api\UsersController.cs" />
     <Compile Include="Api\RolesController.cs" />
     <Compile Include="Api\WithdrawsController.cs" />
-    <Compile Include="Controllers\OutputCacheController.cs" />
-    <Compile Include="Controllers\ShortenersController.cs" />
+    <Compile Include="Controllers\AdsController.cs" />
     <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
@@ -497,6 +496,7 @@
     <Content Include="content\vertical\assets\images\users\avatar-6.jpg" />
     <Content Include="content\vertical\assets\images\users\avatar-7.jpg" />
     <Content Include="content\vertical\assets\images\users\avatar-8.jpg" />
+    <Content Include="content\vertical\assets\images\_premium.png" />
     <Content Include="content\vertical\assets\js\bootstrap.bundle.min.js" />
     <Content Include="content\vertical\assets\js\jquery.min.js" />
     <Content Include="content\vertical\assets\js\metismenu.min.js" />
@@ -758,8 +758,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -802,6 +800,8 @@
     <Content Include="script-handler\app\angular-1.3.7\angular.min.js.map" />
     <Content Include="script-handler\app\angular-1.3.7\errors.json" />
     <Content Include="script-handler\app\angular-1.3.7\version.json" />
+    <Content Include="Views\Shared\_LayoutLanding.cshtml" />
+    <Content Include="Views\Ads\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

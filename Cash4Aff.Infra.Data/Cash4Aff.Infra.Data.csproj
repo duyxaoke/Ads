@@ -59,7 +59,16 @@
     <Compile Include="Migrations\202101171025410_ads.Designer.cs">
       <DependentUpon>202101171025410_ads.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101181559290_á.cs" />
+    <Compile Include="Migrations\202101181559290_á.Designer.cs">
+      <DependentUpon>202101181559290_á.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101181656448_sdsss.cs" />
+    <Compile Include="Migrations\202101181656448_sdsss.Designer.cs">
+      <DependentUpon>202101181656448_sdsss.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\UserViewedAdsRepository.cs" />
     <Compile Include="Repositories\AdsRepository.cs" />
     <Compile Include="Repositories\BalanceRepository.cs" />
     <Compile Include="Repositories\UserRefRepository.cs" />
@@ -89,6 +98,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101171025410_ads.resx">
       <DependentUpon>202101171025410_ads.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101181559290_á.resx">
+      <DependentUpon>202101181559290_á.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101181656448_sdsss.resx">
+      <DependentUpon>202101181656448_sdsss.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

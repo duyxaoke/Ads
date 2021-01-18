@@ -19,6 +19,8 @@ namespace Cash4Aff.Application.AutoMapper
             CreateMap<UserRefViewModel, UserRef>();
             CreateMap<BalanceViewModel, Balance>();
             CreateMap<AdsViewModel, Ads>();
+            CreateMap<UserViewedAdsViewModel, UserViewedAds>();
+            
         }
     }
 }

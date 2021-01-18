@@ -17,6 +17,7 @@ namespace Cash4Aff.Infra.Data.Context
         public DbSet<UserRef> UserRef { get; set; }
         public DbSet<Balance> Balance { get; set; }
         public DbSet<Ads> Ads { get; set; }
+        public DbSet<UserViewedAds> UserViewedAds { get; set; }
         //Cash4Aff
 
         public SampleContext() : base("name=DefaultConnection")
