@@ -15,7 +15,7 @@
                 UtilJS.Loading.Hide();
             })
             .catch((response) => {
-                sys.Alert(false, response.Message);
+                sys.Alert(false, response.message);
                 UtilJS.Loading.Hide();
             });
     };
@@ -60,7 +60,7 @@
                         UtilJS.Loading.Hide();
                     })
                     .catch((response) => {
-                        sys.Alert(false, response.Message);
+                        sys.Alert(false, response.message);
                         UtilJS.Loading.Hide();
                     });
             }
@@ -81,7 +81,7 @@
                     UtilJS.Loading.Hide();
                 })
                 .catch((response) => {
-                    sys.Alert(false, response.Message);
+                    sys.Alert(false, response.message);
                     UtilJS.Loading.Hide();
                 });
         }
@@ -96,7 +96,7 @@
                     UtilJS.Loading.Hide();
                 })
                 .catch((response) => {
-                    sys.Alert(false, response.Message);
+                    sys.Alert(false, response.message);
                     UtilJS.Loading.Hide();
                 });
         }

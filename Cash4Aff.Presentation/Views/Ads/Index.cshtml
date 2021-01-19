@@ -19,6 +19,7 @@
     <link href="~/content/vertical/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/content/vertical/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="~/content/vertical/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/content/plugins/toastr/toastr.min.css" rel="stylesheet" />
     <style>
         .canvas {
             height: 100%;
@@ -248,9 +249,9 @@
     </style>
 
 </head>
-<body>
+<body ng-app="MyApp">
 
-    <div class="bg-color-grayDark">
+    <div class="bg-color-grayDark" ng-controller="IndexController" ng-cloak>
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -268,7 +269,7 @@
                                 <div class="col-lg-7">
                                     <div class="p-5">
                                         <div class="text-center mb-3">
-                                            <a href="index.html" class="text-dark font-size-22 font-family-secondary">
+                                            <a class="text-dark font-size-22 font-family-secondary">
                                                 <b>@Model.Title</b>
                                             </a>
                                         </div>
@@ -281,11 +282,11 @@
                                                 Bạn đã đóng tab, vui lòng thực hiện lại!
                                             </div>
                                         </div>
-                                        
+
                                         <div class="row mt-4">
                                             <div class="col-12 text-center">
                                                 <button type="button" class="btn btn-light waves-effect waves-light"><i class="fas fa-home"></i> Về trang chủ</button>
-                                                <button type="button" class="btn btn-danger waves-effect waves-light"> Bỏ qua</button>
+                                                <button ng-click="Skip()" type="button" class="btn btn-danger waves-effect waves-light"> Bỏ qua</button>
                                                 <button id="goto" type="button" class="btn btn-success waves-effect waves-light button"><i class="far fa-eye"></i> Xem quảng cáo</button>
 
                                             </div> <!-- end col -->
@@ -302,8 +303,16 @@
         <!-- end container -->
     </div>
     <!-- end page -->
+
+    <script src="~/content/static/bundle.js"></script>
+    <script src="~/script-handler/app/app-bundle.js"></script>
+    <script src="~/Content/plugins/toastr/toastr.min.js"></script>
+    <script>
+        var MasterData = {};
+    </script>
+    <script src="~/Content/site.js"></script>
+
     <!-- jQuery  -->
-    <script src="~/content/vertical/assets/js/jquery.min.js"></script>
     <script src="~/content/vertical/assets/js/bootstrap.bundle.min.js"></script>
     <script src="~/content/vertical/assets/js/metismenu.min.js"></script>
     <script src="~/content/vertical/assets/js/waves.js"></script>
@@ -311,6 +320,27 @@
 
     <!-- App js -->
     <script src="~/content/vertical/assets/js/theme.js"></script>
+    <script>
+        var IndexController = ($scope, $compile, $rootScope, $timeout, $filter, UtilFactory, DataFactory, $q, CommonFactory) => {
+            $scope.Skip = function () {
+                let strApiEndPoint = "/Ads/Skip";
+                UtilJS.Loading.Show();
+                CommonFactory.PostMethod(strApiEndPoint, {adsId: @Model.Id} )
+                    .then((response) => {
+                        sys.Alert(response.success ? true : false, response.data);
+                        location.reload();
+                        UtilJS.Loading.Hide();
+                    })
+                    .catch((response) => {
+                        sys.Alert(false, response.message);
+                        UtilJS.Loading.Hide();
+                    });
+            }
+        }
+        IndexController.$inject = ["$scope", "$compile", "$rootScope", "$timeout", "$filter", "UtilFactory", "DataFactory", "$q", "CommonFactory"];
+        addController("IndexController", IndexController);
+
+    </script>
 
     <script>
         var counter = 15;

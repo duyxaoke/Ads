@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -51,6 +54,8 @@
   <ItemGroup>
     <Compile Include="Context\DatabaseInitializer.cs" />
     <Compile Include="Context\SampleContext.cs" />
+    <Compile Include="IDbContext\ConnectionFactory.cs" />
+    <Compile Include="IDbContext\IConnectionFactory.cs" />
     <Compile Include="Migrations\202101170126240_init.cs" />
     <Compile Include="Migrations\202101170126240_init.Designer.cs">
       <DependentUpon>202101170126240_init.cs</DependentUpon>
@@ -66,6 +71,14 @@
     <Compile Include="Migrations\202101181656448_sdsss.cs" />
     <Compile Include="Migrations\202101181656448_sdsss.Designer.cs">
       <DependentUpon>202101181656448_sdsss.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101191259082_adsad.cs" />
+    <Compile Include="Migrations\202101191259082_adsad.Designer.cs">
+      <DependentUpon>202101191259082_adsad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101191503597_adsadasd.cs" />
+    <Compile Include="Migrations\202101191503597_adsadasd.Designer.cs">
+      <DependentUpon>202101191503597_adsadasd.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\UserViewedAdsRepository.cs" />
@@ -104,6 +117,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101181656448_sdsss.resx">
       <DependentUpon>202101181656448_sdsss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101191259082_adsad.resx">
+      <DependentUpon>202101191259082_adsad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101191503597_adsadasd.resx">
+      <DependentUpon>202101191503597_adsadasd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

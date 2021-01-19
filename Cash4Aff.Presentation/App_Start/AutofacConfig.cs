@@ -55,6 +55,13 @@ namespace Cash4Aff.Presentation
             builder.Register(c => new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
             .As<IDbConnection>().InstancePerLifetimeScope();
 
+            // MYSQL Database
+            builder.Register(c => new ConnectionFactory(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            .As<IConnectionFactory>().InstancePerLifetimeScope();
+
+            //builder.Register<IMySqlConnectionFactory>(s => new ConnectionFactory(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString));
+
+
             builder.RegisterType<MenuRepository>().As<IMenuRepository>().InstancePerLifetimeScope();
             builder.RegisterType<MenuAppService>().As<IMenuAppService>().InstancePerDependency();
             builder.RegisterType<MenuInRoleRepository>().As<IMenuInRoleRepository>().InstancePerLifetimeScope();

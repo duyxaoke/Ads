@@ -6,5 +6,6 @@ namespace Cash4Aff.Application.Application.ICash4Aff
 {
     public interface IAdsAppService : IApplication<AdsViewModel, Ads>
     {
+        AdsViewModel GetByUserId(object userId);
     }
 }

@@ -24,6 +24,8 @@ namespace Cash4Aff.Domain.Helpers
         public const bool InActive = false;
         public const string MessageSuccess = "Thành công!";
         public const string MessageError = "Có lỗi xảy ra, vui lòng thử lại!";
+        public const string BaseAffUrl = "https://go.isclix.com/deep_link/4348612418641900165?url=";
+
 
         #region Helpers
         // http://stackoverflow.com/questions/1097331/enumerate-with-return-type-other-than-string/1097387#1097387
@@ -44,6 +46,10 @@ namespace Cash4Aff.Domain.Helpers
 
         #endregion
 
+        public static string GetUrl(string url, string userId)
+        {
+                return BaseAffUrl + url + "&utm_content=" + userId;
+        }
         public static String BetweenStrings(String text, String start, String end)
         {
             try

@@ -19,5 +19,6 @@ namespace Cash4Aff.Domain.Entities
         public string ImageUrl { get; set; }
         public decimal Price { get; set; }
         public int SecondView { get; set; }
+        public int Type { get; set; }
     }
 }

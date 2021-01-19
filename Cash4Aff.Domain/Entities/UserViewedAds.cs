@@ -14,6 +14,7 @@ namespace Cash4Aff.Domain.Entities
         [StringLength(100)]
         public string UserId { get; set; }
         public decimal Price { get; set; }
+        public bool IsSKip { get; set; } = false;
         public DateTime CreatedDate { get; set; }
     }
 }

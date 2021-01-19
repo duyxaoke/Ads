@@ -34,6 +34,9 @@
       <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.8.1.3\lib\net45\FluentValidation.dll</HintPath>
     </Reference>
@@ -111,6 +114,10 @@
     <ProjectReference Include="..\Cash4Aff.Domain\Cash4Aff.Domain.csproj">
       <Project>{d495fed9-9682-44c0-9581-50289597c479}</Project>
       <Name>Watch4Paid.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cash4Aff.Infra.Data\Cash4Aff.Infra.Data.csproj">
+      <Project>{470424B8-DB74-4522-9163-189A824FC64B}</Project>
+      <Name>Cash4Aff.Infra.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
